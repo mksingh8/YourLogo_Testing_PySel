@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from pageObjects.LoginPage import LoginPage
+from pageObjects.MyaccountPage import MyaccountPage
 from utility.BaseClass import BaseClass
 
 
@@ -14,23 +15,33 @@ from utility.BaseClass import BaseClass
 class TestLogIn(BaseClass):
 
     def test_login(self):
-        print(self.driver.title)
+        # print(self.driver.title)
         loginpage = LoginPage(self.driver)
         loginpage.loginlink().click()
         # self.driver.find_element_by_css_selector(".login").click()
-        print(self.driver.title)
+        # print(self.driver.title)
 
-        self.driver.find_element_by_css_selector("#email").send_keys("admin@gmail.com")
-        self.driver.find_element_by_css_selector("#passwd").send_keys("admin")
-        self.driver.find_element_by_css_selector("#SubmitLogin").click()
+        loginpage.email().send_keys("admin@gmail.com")
+        # self.driver.find_element_by_css_selector("#email").send_keys("admin@gmail.com")
+
+        loginpage.password().send_keys("admin")
+        # self.driver.find_element_by_css_selector("#passwd").send_keys("admin")
+
+        loginpage.signin().click()
+        # self.driver.find_element_by_css_selector("#SubmitLogin").click()
         print(self.driver.title)  # My account - My Store
-        self.driver.find_element_by_css_selector("#search_query_top").send_keys("shirt")
+
+        myaccountPage = MyaccountPage(self.driver)
+        myaccountPage.searchbox().send_keys("shirt")
+        # self.driver.find_element_by_css_selector("#search_query_top").send_keys("shirt")
         # //li[@class='ac_even ac_over']
-        shirt = self.driver.find_element_by_xpath("//div[@class='ac_results']//li")
+
+        myaccountPage.searchresult().click()
+        # shirt = self.driver.find_element_by_xpath("//div[@class='ac_results']//li")
         # driver.find_element_by_xpath("//li[@class='ac_even ac_over']")
         # WebDriverWait(driver, 5).until(EC.presence_of_element_located(By.XPATH(shirt)))
         # driver.find_element_by_xpath("//div[@class='ac_results']//li").click()
-        shirt.click()
+        # shirt.click()
         # for menu in menus:
         #     #if "shirt" in menu.text:
         #         #menu.click()
