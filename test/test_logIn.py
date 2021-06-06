@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+
+from pageObjects.LoginPage import LoginPage
 from utility.BaseClass import BaseClass
 
 
@@ -12,7 +14,12 @@ from utility.BaseClass import BaseClass
 class TestLogIn(BaseClass):
 
     def test_login(self):
-        self.driver.find_element_by_css_selector(".login").click()
+        print(self.driver.title)
+        loginpage = LoginPage(self.driver)
+        loginpage.loginlink().click()
+        # self.driver.find_element_by_css_selector(".login").click()
+        print(self.driver.title)
+
         self.driver.find_element_by_css_selector("#email").send_keys("admin@gmail.com")
         self.driver.find_element_by_css_selector("#passwd").send_keys("admin")
         self.driver.find_element_by_css_selector("#SubmitLogin").click()

@@ -7,6 +7,7 @@ def pytest_addoption(parser):
         "--browser_name", action="store", default="chrome", help="my option: chrome or firefox"
     )
 
+
 @pytest.fixture(scope="class")
 def setup(request):
     browser_name = request.config.getoption("--browser_name")
@@ -24,7 +25,3 @@ def setup(request):
     yield
     print(" *** yield code executed")
     driver.close()
-
-
-
-
